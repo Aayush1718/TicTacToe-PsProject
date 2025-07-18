@@ -34,7 +34,7 @@ function LoginPage() {
         return;
       }
 
-      const endpoint = isLogin ? "http://localhost:5000/api/login" : "http://localhost:5000/api/register";
+      const endpoint = isLogin ? `${import.meta.env.VITE_API_URL}/api/login` : `${import.meta.env.VITE_API_URL}/api/register`;
       const payload = isLogin
         ? { email: formData.email, password: formData.password }
         : {

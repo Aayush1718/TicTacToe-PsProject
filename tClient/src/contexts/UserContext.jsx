@@ -12,7 +12,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     if (user && !socket) {
       const ws = new WebSocket(
-        `ws://localhost:5000/?token=${localStorage.getItem("token")}`
+        `${import.meta.env.VITE_API_URL.replace("http", "ws")}/?token=${localStorage.getItem("token")}`
       );
 
       ws.onopen = () => {
