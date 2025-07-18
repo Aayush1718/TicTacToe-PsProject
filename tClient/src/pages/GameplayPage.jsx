@@ -8,7 +8,7 @@ const GameplayPage = () => {
   const { socket, room, setRoom } = useUserContext();
 
   const goToDashboard = () => {
-    setRoom(null); // clear current room from context
+    setRoom(null);
     navigate("/dashboard");
   };
 
@@ -30,7 +30,7 @@ const GameplayPage = () => {
           board: message.board,
           status: message.roomStatus,
           winner: message.winner,
-          nextTurn: message.nextTurn, // 🆕 Fix
+          nextTurn: message.nextTurn, 
         }));
       }
     };

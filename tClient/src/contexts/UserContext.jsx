@@ -3,12 +3,10 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // current user info
-  const [socket, setSocket] = useState(null); // WebSocket instance
-  const [room, setRoom] = useState(null); // current room info (roomId, symbol, etc.)
-  const [isConnected, setIsConnected] = useState(false); // ws connection status
-
-  // Connect WebSocket when user logs in
+  const [user, setUser] = useState(null); 
+  const [socket, setSocket] = useState(null); 
+  const [room, setRoom] = useState(null); 
+  const [isConnected, setIsConnected] = useState(false); 
   useEffect(() => {
     if (user && !socket) {
       const ws = new WebSocket(
@@ -16,7 +14,7 @@ export const UserContextProvider = ({ children }) => {
       );
 
       ws.onopen = () => {
-        console.log("✅ WebSocket connected");
+        console.log("WebSocket connected");
         setIsConnected(true);
       };
 
@@ -57,17 +55,17 @@ export const UserContextProvider = ({ children }) => {
             break;
 
           case "error":
-            console.error("❌ Server error:", message.message);
+            console.error("Server error:", message.message);
             alert(message.message);
             break;
 
           default:
-            console.warn("⚠️ Unknown WS message:", message);
+            console.warn("Unknown WS message:", message);
         }
       };
 
       ws.onclose = () => {
-        console.log("⚡ WebSocket disconnected");
+        console.log("WebSocket disconnected");
         setIsConnected(false);
         setSocket(null);
       };
@@ -78,14 +76,12 @@ export const UserContextProvider = ({ children }) => {
 
       setSocket(ws);
 
-      // Cleanup
       return () => {
         ws.close();
         setSocket(null);
       };
     }
-  }, [user]); // runs when user changes
-
+  }, [user]); 
   const logout = () => {
     setUser(null);
     setRoom(null);

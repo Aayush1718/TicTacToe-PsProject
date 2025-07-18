@@ -25,33 +25,31 @@ const DashboardPage = () => {
       const message = JSON.parse(event.data);
 
       if (message.type === "room_created") {
-        console.log("✅ Room Created:", message.room.roomId);
+        console.log("Room Created:", message.room.roomId);
 
-        // Save room to context
         setRoom({
           roomId: message.room.roomId,
-          symbol: message.symbol, // X for creator
+          symbol: message.symbol, 
           board: message.room.board || [
             [null, null, null],
             [null, null, null],
             [null, null, null],
           ],
           status: message.room.status,
-          nextTurn: message.nextTurn, // 🆕 Fix
+          nextTurn: message.nextTurn, 
         });
 
-        // Show popup
         setWaitingRoomId(message.room.roomId);
       }
 
       if (message.type === "player_joined") {
-        console.log("✅ Player joined:", message.room);
+        console.log("Player joined:", message.room);
 
         setRoom((prev) => ({
           ...prev,
           players: message.room.players,
           status: message.room.status,
-          nextTurn: message.nextTurn, // 🆕 Fix
+          nextTurn: message.nextTurn, 
         }));
 
         navigate(`/game/${message.room.roomId}`);
@@ -84,20 +82,20 @@ const DashboardPage = () => {
       const message = JSON.parse(event.data);
 
       if (message.type === "player_joined") {
-        console.log("✅ Joined Room:", message.room.roomId);
+        console.log("Joined Room:", message.room.roomId);
 
         setRoom({
           roomId: message.room.roomId,
           symbol: message.room.players.find(
             (p) => p.symbol === "O"
-          ).symbol, // O for joiner
+          ).symbol,
           board: message.room.board || [
             [null, null, null],
             [null, null, null],
             [null, null, null],
           ],
           status: message.room.status,
-          nextTurn: message.nextTurn, // 🆕 Fix
+          nextTurn: message.nextTurn, 
         });
 
         navigate(`/game/${message.room.roomId}`);

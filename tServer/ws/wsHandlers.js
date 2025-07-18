@@ -42,7 +42,7 @@ const handleCreateRoom = async (ws, user) => {
       type: "room_created",
       room: newRoom,
       symbol: "X",
-      nextTurn: "X", // ADD THIS
+      nextTurn: "X",
     })
   );
 
@@ -71,7 +71,7 @@ const handleJoinRoom = async (ws, user, roomId) => {
   broadcastToRoom(roomId, {
   type: "player_joined",
   room,
-  nextTurn: "X", // ADD THIS
+  nextTurn: "X",
 });
 
 };
